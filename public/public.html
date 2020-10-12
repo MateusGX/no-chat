@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>no-chat | public</title>
+    <link rel="stylesheet" href="/css/page">
+</head>
+
+<body>
+    <p id="link">PUBLIC</p>
+    <div class="msgBox" id="msgBox"></div>
+    <div class="ipt">
+        <input type="text" name="msg" id="msgIpt" placeholder="message...">
+        <button onclick="sendMsg()">SEND</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.emit('publicUser', window.location.pathname.split('/')[2], 
+        window.location.pathname.split('/')[4]);
+        socket.on('getMessage', (sender, color, msg, id) => {
+            let elem_div = document.createElement('div');
+            let elem_pname = document.createElement('p');
+            elem_pname.setAttribute('class', 'name');
+            elem_pname.innerHTML = sender;
+            elem_div.appendChild(elem_pname);
+            let elem_ptxt = document.createElement('p');
+            elem_ptxt.setAttribute('class', 'msgTxt');
+            elem_ptxt.innerHTML = msg;
+            elem_div.appendChild(elem_ptxt);
+
+            if (id == socket.id) {
+                elem_div.setAttribute('class', 'msg you');
+            } else {
+                elem_div.setAttribute('class', 'msg');
+            }
+            elem_div.style.backgroundColor = color;
+            document.getElementById('msgBox').appendChild(elem_div);
+        });
+        function sendMsg() {
+            if (document.getElementById('msgIpt').value != null && (document.getElementById('msgIpt').value).trim() != '') {
+                socket.emit('sendMessage', document.getElementById('msgIpt').value);
+                document.getElementById('msgIpt').value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style">
+    <title>no-chat | username</title>
+</head>
+
+<body>
+    <section class="home">
+        <h1>NO-CHAT</h1>
+        <div class="inpts">
+            <input type="text" name="uname" id="uname" placeholder="username...">
+            <input type="color" name="ucolor" id="ucolor">
+        </div>
+        <div class="btns">
+            <button onclick="join()">JOIN</button>
+        </div>
+    </section>
+    <script>
+        function join(){
+            let uname = (document.getElementById('uname').value != null && (document.getElementById('uname').value).trim() != '' )?document.getElementById('uname').value:(`User-${Math.round(Math.random() * 100000)}`);
+            let ucolor = (document.getElementById('ucolor').value != null && (document.getElementById('ucolor').value) != '' )?document.getElementById('ucolor').value:'222222';
+            window.location.href = `${window.location.protocol}//${window.location.host}/${window.location.pathname.split('/')[1]}/${uname.replace('#','')}/c/${ucolor.replace('#','')}`;
+        }
+    </script>
+</body>
+
+</html>

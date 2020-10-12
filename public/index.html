@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style">
+    <title>no-chat</title>
+    <style>
+        .home .btns button:nth-child(1){
+            margin-right: 5px;
+        }
+        .home .btns button:nth-child(2){
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="home">
+        <h1>NO-CHAT</h1>
+        <div class="inpts">
+            <input type="text" name="uname" id="uname" placeholder="username...">
+            <input type="color" name="ucolor" id="ucolor">
+        </div>
+        <div class="btns">
+            <button onclick="privateRoom()">PRIVATE ROOM</button>
+            <button onclick="publicRoom()">PUBLIC ROOM</button>
+        </div>
+    </section>
+    <script>
+        function publicRoom(){
+            let uname = (document.getElementById('uname').value != null && (document.getElementById('uname').value).trim() != '' )?(document.getElementById('uname').value).replace(' ', '-'):(`User-${Math.round(Math.random() * 100000)}`);
+            let ucolor = (document.getElementById('ucolor').value != null && (document.getElementById('ucolor').value) != '' )?document.getElementById('ucolor').value:'222222';
+            window.location.href = `${window.location.href}public/${uname}/c/${ucolor.replace('#','')}`;
+        }
+        function privateRoom(){
+            let uname = (document.getElementById('uname').value != null && (document.getElementById('uname').value).trim() != '' )?document.getElementById('uname').value:(`User-${Math.round(Math.random() * 100000)}`);
+            let ucolor = (document.getElementById('ucolor').value != null && (document.getElementById('ucolor').value) != '' )?document.getElementById('ucolor').value:'222222';
+            window.location.href = `${window.location.href}private/${uname.replace('#','')}/c/${ucolor.replace('#','')}`;
+        }
+    </script>
+</body>
+
+</html>
