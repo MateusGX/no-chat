@@ -1,10 +1,23 @@
 const app = require('express')();
+const { instrument } = require("@socket.io/admin-ui");
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
-    serveClient: false
+    serveClient: false,
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true
+    }
 });
 
-const uuid= require('uuid').v4;
+instrument(io, {
+    auth: {
+        type: "basic",
+        username: "admin",
+        password: "$2b$10$heqvAkYMez.Va6Et2uXInOnkCT6/uQj1brkrbyG3LpopDklcq7ZOS" // "changeit" encrypted with bcrypt
+    },
+});
+
+const uuid = require('uuid').v4;
 const validate = require('uuid').validate;
 const xss = require('xss');
 

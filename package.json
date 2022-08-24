@@ -10,9 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "socket.io": "^2.3.0",
-    "uuid": "^8.3.1",
-    "xss": "^1.0.8"
+    "@socket.io/admin-ui": "^0.4.0",
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1",
+    "uuid": "^8.3.2",
+    "xss": "^1.0.14"
   }
 }
